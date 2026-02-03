@@ -74,135 +74,129 @@ export default function MonthlyTarget() {
 
   return (
     <div className="rounded-2xl border border-gray-200 bg-gray-100 dark:border-gray-800 dark:bg-white/[0.03]">
-      <div className="px-5 pt-5 bg-white shadow-default rounded-2xl pb-11 dark:bg-gray-900 sm:px-6 sm:pt-6">
-        <div className="flex justify-between">
+      <div className="px-5 pt-5 bg-white shadow-default rounded-2xl pb-6 dark:bg-gray-900 sm:px-6 sm:pt-6">
+        <div className="flex items-start justify-between">
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
-              Monthly Target
-            </h3>
-            <p className="mt-1 font-normal text-gray-500 text-theme-sm dark:text-gray-400">
-              Target you’ve set for each month
-            </p>
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">Notifications</h3>
+            <p className="mt-1 text-theme-sm text-gray-500 dark:text-gray-400">Manage recent activity and alerts</p>
           </div>
-          <div className="relative inline-block">
-            <button onClick={toggleDropdown} className="dropdown-toggle">
-              <MoreDotIcon className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-300" />
-            </button>
-            <Dropdown
-              isOpen={isOpen}
-              onClose={closeDropdown}
-              className="w-40 p-2"
-            >
-              <DropdownItem
-                tag="a"
-                onItemClick={closeDropdown}
-                className="flex w-full font-normal text-left text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
-              >
-                View More
-              </DropdownItem>
-              <DropdownItem
-                tag="a"
-                onItemClick={closeDropdown}
-                className="flex w-full font-normal text-left text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
-              >
-                Delete
-              </DropdownItem>
-            </Dropdown>
-          </div>
+          <button onClick={closeDropdown} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">✕</button>
         </div>
-        <div className="relative ">
-          <div className="max-h-[330px]">
-            <ReactApexChart
-              options={options}
-              series={series}
-              type="radialBar"
-              height={330}
-            />
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          <button className="px-3 py-1 rounded-full bg-gray-100 text-sm text-gray-700">All</button>
+          <button className="px-3 py-1 rounded-full bg-white border text-sm text-gray-700">Remainders</button>
+          <button className="px-3 py-1 rounded-full bg-white border text-sm text-gray-700">Payment</button>
+          <button className="px-3 py-1 rounded-full bg-white border text-sm text-gray-700">Booking</button>
+          <button className="px-3 py-1 rounded-full bg-white border text-sm text-gray-700">Confirmation</button>
+        </div>
+
+        <div className="mt-6">
+          <div className="flex items-center justify-between">
+            <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">24 May</h4>
+            <button className="text-sm text-theme-xs text-gray-500 hover:underline">Mark as all read</button>
           </div>
 
-          <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-[95%] rounded-full bg-success-50 px-3 py-1 text-xs font-medium text-success-600 dark:bg-success-500/15 dark:text-success-500">
-            +10%
-          </span>
+          <ul className="mt-4 space-y-4">
+            <li className="flex items-start gap-3">
+              <div className="mt-1">
+                <div className="w-8 h-8 rounded-full bg-white border flex items-center justify-center">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L12 12" stroke="#111827" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center justify-between">
+                  <p className="font-medium text-gray-800 dark:text-white/90">Booking confirmed!</p>
+                  <span className="text-xs text-gray-400">10:04 am</span>
+                </div>
+                <p className="text-sm text-gray-500">Your booking for Slot-02 is confirmed for 23. Please <span className="font-medium">view details</span> for more info</p>
+              </div>
+            </li>
+
+            <li className="flex items-start gap-3">
+              <div className="mt-1">
+                <div className="w-8 h-8 rounded-full bg-white border flex items-center justify-center">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h18" stroke="#111827" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center justify-between">
+                  <p className="font-medium text-gray-800 dark:text-white/90">Payment Method Saved</p>
+                  <span className="text-xs text-gray-400">9:23 am</span>
+                </div>
+                <p className="text-sm text-gray-500">Your payment method has been securely saved and is now ready to use for future transactions</p>
+              </div>
+            </li>
+          </ul>
+
+          <h4 className="mt-6 mb-3 text-sm font-medium text-gray-500">Earlier</h4>
+
+          <ul className="space-y-3">
+            <li className="flex items-start gap-3">
+              <div className="mt-1">
+                <div className="w-8 h-8 rounded-full bg-white border flex items-center justify-center">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v6" stroke="#111827" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center justify-between">
+                  <p className="font-medium text-gray-800 dark:text-white/90">Session reminder</p>
+                  <span className="text-xs text-gray-400">10:04 am</span>
+                </div>
+                <p className="text-sm text-gray-500">You have an upcoming session. Don’t forget to show up on time!</p>
+              </div>
+            </li>
+
+            <li className="flex items-start gap-3">
+              <div className="mt-1">
+                <div className="w-8 h-8 rounded-full bg-white border flex items-center justify-center">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12h12" stroke="#111827" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center justify-between">
+                  <p className="font-medium text-gray-800 dark:text-white/90">Session cancelled</p>
+                  <span className="text-xs text-gray-400">9:23 am</span>
+                </div>
+                <p className="text-sm text-gray-500">Your booking has been cancelled. You can <span className="font-medium">reschedule</span> anytime</p>
+              </div>
+            </li>
+
+            <li className="flex items-start gap-3">
+              <div className="mt-1">
+                <div className="w-8 h-8 rounded-full bg-white border flex items-center justify-center">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h18" stroke="#111827" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center justify-between">
+                  <p className="font-medium text-gray-800 dark:text-white/90">Payment successful</p>
+                  <span className="text-xs text-gray-400">9:45 am</span>
+                </div>
+                <p className="text-sm text-gray-500">Thank you for your purchase! A confirmation email has been sent to your address.</p>
+              </div>
+            </li>
+
+            <li className="flex items-start gap-3">
+              <div className="mt-1">
+                <div className="w-8 h-8 rounded-full bg-white border flex items-center justify-center">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h18" stroke="#111827" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center justify-between">
+                  <p className="font-medium text-gray-800 dark:text-white/90">Goal Achieved</p>
+                  <span className="text-xs text-gray-400">9:45 am</span>
+                </div>
+                <p className="text-sm text-gray-500">Great job! You’ve attended your 30th class in your journey</p>
+              </div>
+            </li>
+          </ul>
         </div>
-        <p className="mx-auto mt-10 w-full max-w-[380px] text-center text-sm text-gray-500 sm:text-base">
-          You earn $3287 today, it&apos;s higher than last month. Keep up your
-          good work!
-        </p>
       </div>
 
-      <div className="flex items-center justify-center gap-5 px-6 py-3.5 sm:gap-8 sm:py-5">
-        <div>
-          <p className="mb-1 text-center text-gray-500 text-theme-xs dark:text-gray-400 sm:text-sm">
-            Target
-          </p>
-          <p className="flex items-center justify-center gap-1 text-base font-semibold text-gray-800 dark:text-white/90 sm:text-lg">
-            $20K
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M7.26816 13.6632C7.4056 13.8192 7.60686 13.9176 7.8311 13.9176C7.83148 13.9176 7.83187 13.9176 7.83226 13.9176C8.02445 13.9178 8.21671 13.8447 8.36339 13.6981L12.3635 9.70076C12.6565 9.40797 12.6567 8.9331 12.3639 8.6401C12.0711 8.34711 11.5962 8.34694 11.3032 8.63973L8.5811 11.36L8.5811 2.5C8.5811 2.08579 8.24531 1.75 7.8311 1.75C7.41688 1.75 7.0811 2.08579 7.0811 2.5L7.0811 11.3556L4.36354 8.63975C4.07055 8.34695 3.59568 8.3471 3.30288 8.64009C3.01008 8.93307 3.01023 9.40794 3.30321 9.70075L7.26816 13.6632Z"
-                fill="#D92D20"
-              />
-            </svg>
-          </p>
-        </div>
-
-        <div className="w-px bg-gray-200 h-7 dark:bg-gray-800"></div>
-
-        <div>
-          <p className="mb-1 text-center text-gray-500 text-theme-xs dark:text-gray-400 sm:text-sm">
-            Revenue
-          </p>
-          <p className="flex items-center justify-center gap-1 text-base font-semibold text-gray-800 dark:text-white/90 sm:text-lg">
-            $20K
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M7.60141 2.33683C7.73885 2.18084 7.9401 2.08243 8.16435 2.08243C8.16475 2.08243 8.16516 2.08243 8.16556 2.08243C8.35773 2.08219 8.54998 2.15535 8.69664 2.30191L12.6968 6.29924C12.9898 6.59203 12.9899 7.0669 12.6971 7.3599C12.4044 7.6529 11.9295 7.65306 11.6365 7.36027L8.91435 4.64004L8.91435 13.5C8.91435 13.9142 8.57856 14.25 8.16435 14.25C7.75013 14.25 7.41435 13.9142 7.41435 13.5L7.41435 4.64442L4.69679 7.36025C4.4038 7.65305 3.92893 7.6529 3.63613 7.35992C3.34333 7.06693 3.34348 6.59206 3.63646 6.29926L7.60141 2.33683Z"
-                fill="#039855"
-              />
-            </svg>
-          </p>
-        </div>
-
-        <div className="w-px bg-gray-200 h-7 dark:bg-gray-800"></div>
-
-        <div>
-          <p className="mb-1 text-center text-gray-500 text-theme-xs dark:text-gray-400 sm:text-sm">
-            Today
-          </p>
-          <p className="flex items-center justify-center gap-1 text-base font-semibold text-gray-800 dark:text-white/90 sm:text-lg">
-            $20K
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M7.60141 2.33683C7.73885 2.18084 7.9401 2.08243 8.16435 2.08243C8.16475 2.08243 8.16516 2.08243 8.16556 2.08243C8.35773 2.08219 8.54998 2.15535 8.69664 2.30191L12.6968 6.29924C12.9898 6.59203 12.9899 7.0669 12.6971 7.3599C12.4044 7.6529 11.9295 7.65306 11.6365 7.36027L8.91435 4.64004L8.91435 13.5C8.91435 13.9142 8.57856 14.25 8.16435 14.25C7.75013 14.25 7.41435 13.9142 7.41435 13.5L7.41435 4.64442L4.69679 7.36025C4.4038 7.65305 3.92893 7.6529 3.63613 7.35992C3.34333 7.06693 3.34348 6.59206 3.63646 6.29926L7.60141 2.33683Z"
-                fill="#039855"
-              />
-            </svg>
-          </p>
-        </div>
+      <div className="px-6 py-4 text-center">
+        <a href="#" className="text-sm text-gray-500 hover:underline">View all notifications</a>
       </div>
     </div>
   );

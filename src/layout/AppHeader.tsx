@@ -84,7 +84,7 @@ const AppHeader: React.FC = () => {
           </button>
 
           <Link href="/" className="lg:hidden">
-            <span className="text-2xl font-semibold text-gray-900 dark:text-white">Prrofly</span>
+            <span className="text-2xl font-semibold text-gray-900 dark:text-white">Proofly</span>
           </Link> 
 
           <button

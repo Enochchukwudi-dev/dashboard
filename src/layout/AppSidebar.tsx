@@ -30,7 +30,7 @@ const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
     name: "Dashboard",
-    subItems: [{ name: "Ecommerce", path: "/", pro: false }],
+    subItems: [{ name: "See Laundry Activity", path: "/", pro: false }],
   },
   {
     icon: <UserCircleIcon />,
@@ -305,7 +305,7 @@ const AppSidebar: React.FC = () => {
       >
         <Link href="/">
           {isExpanded || isHovered || isMobileOpen ? (
-            <span className="text-2xl font-semibold text-gray-900 dark:text-white">Prrofly</span>
+            <span className="text-2xl font-semibold text-gray-900 dark:text-white">Proofly</span>
           ) : (
             <span className="text-lg font-semibold text-gray-900 dark:text-white">P</span>
           )}

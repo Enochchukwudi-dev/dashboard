@@ -36,8 +36,8 @@ export const EcommerceMetrics = () => {
         </div>
         <div className="flex items-end justify-between mt-5">
           <div>
-            <span className="text-sm text-gray-500 dark:text-gray-400">
-             Total Customners (Lifetime)
+            <span className="text-sm text-gray-500 dark:text-gray-00">
+             Total Customers (Lifetime)
             </span>
             <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
               534
@@ -59,7 +59,7 @@ export const EcommerceMetrics = () => {
         <div className="flex items-end justify-between mt-5">
           <div>
             <span className="text-sm text-gray-500 dark:text-gray-400">
-            Active Tickets
+            Pending / Active Tickets (Today)
             </span>
             <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
               53
@@ -80,7 +80,7 @@ export const EcommerceMetrics = () => {
         <div className="flex items-end justify-between mt-5">
           <div>
             <span className="text-sm text-gray-500 dark:text-gray-400">
-             Completed Tickets
+             Completed Tickets Today (Paid)
             </span>
             <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
               14

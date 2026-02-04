@@ -19,28 +19,16 @@ export default function StatisticsChart() {
       <div className="flex items-center justify-between mb-4">
         <div>
           <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">Total Revenue</h3>
-          <p className="mt-1 text-gray-500 text-theme-sm dark:text-gray-400">Overview of revenue figures</p>
-        </div>
-        <div>
-          <a href="/transactions" className="text-sm text-gray-500  hover:underline dark:text-gray-400">View Transaction history</a>
+          <p className="mt-1 text-gray-500 text-theme-sm dark:text-gray-400">Money In (Today)</p>
         </div>
       </div>
 
       <div className="grid grid-cols-3 gap-4">
         <div className="text-center">
-          <p className="text-sm text-gray-500">Today</p>
           <p className="mt-1 text-xl font-semibold text-gray-800 dark:text-white/90">{today}</p>
         </div>
 
-        <div className="text-center">
-          <p className="text-sm text-gray-500">This Week</p>
-          <p className="mt-1 text-xl font-semibold text-gray-800 dark:text-white/90">{week}</p>
-        </div>
-
-        <div className="text-center">
-          <p className="text-sm text-gray-500">This Month</p>
-          <p className="mt-1 text-xl font-semibold text-gray-800 dark:text-white/90">{month}</p>
-        </div>
+    
       </div>
     </div>
   );

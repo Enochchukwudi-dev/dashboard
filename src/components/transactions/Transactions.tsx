@@ -12,7 +12,14 @@ import {
 import Badge from "../ui/badge/Badge";
 import { transactions as mockTransactions, Transaction } from "@/lib/mockData";
 
-const tabs = ["All", "Success", "Pending", "Failed"] as const;
+const tabs = ["All", "Collected", "Processing", "Unpicked"] as const;
+
+const STATUS_MAP: Record<typeof tabs[number], string | undefined> = {
+  All: undefined,
+  Collected: "Success",
+  Processing: "Pending",
+  Unpicked: undefined,
+};
 
 export default function Transactions() {
   const [tab, setTab] = useState<typeof tabs[number]>("All");
@@ -20,7 +27,8 @@ export default function Transactions() {
 
   const filtered = useMemo(() => {
     return mockTransactions.filter((t) => {
-      const matchStatus = tab === "All" ? true : t.status === tab;
+      const mappedStatus = STATUS_MAP[tab];
+      const matchStatus = tab === "All" ? true : (mappedStatus ? t.status === mappedStatus : false);
       const matchQuery =
         !query ||
         t.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -164,7 +172,13 @@ export default function Transactions() {
                 <TableCell className="py-3 text-gray-500 text-theme-sm dark:text-gray-400">{t.amount}</TableCell>
 
                 <TableCell className="py-3 text-gray-500 text-theme-sm dark:text-gray-400">
-                  <Badge size="sm" color={t.status === "Success" ? "success" : t.status === "Pending" ? "warning" : "error"}>{t.status}</Badge>
+                  {tab === "Unpicked" ? (
+                    '-'
+                  ) : (
+                    <Badge size="sm" color={t.status === "Success" ? "success" : t.status === "Pending" ? "warning" : "error"}>
+                      {t.status === "Success" ? "Collected" : t.status === "Pending" ? "Processing" : t.status}
+                    </Badge>
+                  )}
                 </TableCell>
 
 
@@ -193,7 +207,13 @@ export default function Transactions() {
 
             <div className="flex flex-col items-end gap-2">
               <div className="text-gray-500 text-theme-sm dark:text-gray-400">{t.amount}</div>
-              <Badge size="sm" color={t.status === "Success" ? "success" : t.status === "Pending" ? "warning" : "error"}>{t.status}</Badge>
+              {tab === "Unpicked" ? (
+                ''
+              ) : (
+                <Badge size="sm" color={t.status === "Success" ? "success" : t.status === "Pending" ? "warning" : "error"}>
+                  {t.status === "Success" ? "Collected" : t.status === "Pending" ? "Processing" : t.status}
+                </Badge>
+              )}
             </div>
 
 

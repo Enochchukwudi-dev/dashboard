@@ -12,20 +12,20 @@ import {
 import Badge from "../ui/badge/Badge";
 import { transactions as mockTransactions, Transaction } from "@/lib/mockData";
 
-const currencies = ["All", "Active", "Available for pickup", "Collected"] as const;
+const tabs = ["All", "Success", "Pending", "Failed"] as const;
 
 export default function Transactions() {
-  const [tab, setTab] = useState<typeof currencies[number]>("All");
+  const [tab, setTab] = useState<typeof tabs[number]>("All");
   const [query, setQuery] = useState("");
 
   const filtered = useMemo(() => {
     return mockTransactions.filter((t) => {
-      const matchCurrency = tab === "All" ? true : t.currency === tab;
+      const matchStatus = tab === "All" ? true : t.status === tab;
       const matchQuery =
         !query ||
         t.name.toLowerCase().includes(query.toLowerCase()) ||
         (t.phone && t.phone.includes(query));
-      return matchCurrency && matchQuery;
+      return matchStatus && matchQuery;
     });
   }, [tab, query]);
 
@@ -35,7 +35,7 @@ export default function Transactions() {
         <div>
           <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">Tickets</h3>
           <div className="mt-2 flex items-center gap-2">
-            {currencies.map((c) => (
+            {tabs.map((c) => (
               <button
                 key={c}
                 onClick={() => setTab(c)}

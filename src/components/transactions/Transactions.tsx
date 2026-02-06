@@ -12,7 +12,7 @@ import {
 import Badge from "../ui/badge/Badge";
 import { transactions as mockTransactions, Transaction } from "@/lib/mockData";
 
-const currencies = ["All", "USD", "AUD", "NGN", "GBP"] as const;
+const currencies = ["All", "Active", "Available for pickup", "Collected"] as const;
 
 export default function Transactions() {
   const [tab, setTab] = useState<typeof currencies[number]>("All");
@@ -24,7 +24,7 @@ export default function Transactions() {
       const matchQuery =
         !query ||
         t.name.toLowerCase().includes(query.toLowerCase()) ||
-        (t.email && t.email.toLowerCase().includes(query.toLowerCase()));
+        (t.phone && t.phone.includes(query));
       return matchCurrency && matchQuery;
     });
   }, [tab, query]);
@@ -33,7 +33,7 @@ export default function Transactions() {
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
       <div className="flex flex-col gap-2 mb-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">Transaction</h3>
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">Tickets</h3>
           <div className="mt-2 flex items-center gap-2">
             {currencies.map((c) => (
               <button
@@ -52,17 +52,17 @@ export default function Transactions() {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="relative">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 w-full">
+          <div className="relative w-full sm:w-auto">
             <input
               aria-label="Search transactions"
               placeholder="Search here..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-56 rounded-lg border border-gray-200 bg-white px-4 py-2 text-theme-sm text-gray-500 placeholder:text-gray-400 shadow-theme-xs focus:outline-none focus:ring-2 focus:ring-green-200"
+              className="w-full sm:w-56 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2 text-theme-sm text-gray-500 dark:text-gray-200 placeholder:text-gray-400 dark:placeholder:text-gray-400 shadow-theme-xs dark:shadow-none focus:outline-none focus:ring-2 focus:ring-green-200 dark:focus:ring-green-400"
             />
             <svg
-              className="absolute right-3 top-2.5 h-5 w-5 text-gray-300"
+              className="absolute right-3 top-2.5 h-5 w-5 text-gray-300 dark:text-gray-400"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -84,39 +84,41 @@ export default function Transactions() {
             </svg>
           </div>
 
-          <button className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M3 17H21" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-              <path d="M7 6H17" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-              <path d="M7 12H13" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-            </svg>
-            Filter
-          </button>
+          <div className="flex gap-2 w-full sm:w-auto">
+            <button className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2.5 text-theme-sm font-medium text-gray-700 dark:text-gray-200 shadow-theme-xs hover:bg-gray-50 dark:hover:bg-gray-700">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M3 17H21" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M7 6H17" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M7 12H13" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+              </svg>
+              <span>Filter</span>
+            </button>
 
-          <button className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50">
-            Export Data
-          </button>
+            <button className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2.5 text-theme-sm font-medium text-gray-700 dark:text-gray-200 shadow-theme-xs hover:bg-gray-50 dark:hover:bg-gray-700">
+              Export Data
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-full overflow-x-auto">
+      <div className="max-w-full overflow-x-auto hidden md:block">
         <Table>
           <TableHeader className="border-gray-100 dark:border-gray-800 border-y">
             <TableRow>
               <TableCell isHeader className="py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400">
-                Name
+                Ticket Details
               </TableCell>
               <TableCell isHeader className="py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400">
-                Date and Time
+                No. of items
               </TableCell>
               <TableCell isHeader className="py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400">
-                Recipient Country
+                Ticket ID
               </TableCell>
               <TableCell isHeader className="py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400">
                 Amount
@@ -124,9 +126,7 @@ export default function Transactions() {
               <TableCell isHeader className="py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400">
                 Status
               </TableCell>
-              <TableCell isHeader className="py-3 font-medium text-gray-500 text-end text-theme-xs dark:text-gray-400">
-                <span />
-              </TableCell>
+
             </TableRow>
           </TableHeader>
 
@@ -148,12 +148,12 @@ export default function Transactions() {
                     </div>
                     <div>
                       <p className="font-medium text-gray-800 text-theme-sm dark:text-white/90">{t.name}</p>
-                      {t.email && <span className="text-gray-500 text-theme-xs">{t.email}</span>}
+                      {t.phone && <span className="text-gray-500 text-theme-xs">{t.phone}</span>}
                     </div>
                   </div>
                 </TableCell>
 
-                <TableCell className="py-3 text-gray-500 text-theme-sm dark:text-gray-400">{t.date}</TableCell>
+                <TableCell className="py-3 text-gray-500 text-theme-sm dark:text-gray-400">{t.items !== undefined ? `No. of items : ${t.items}` : '-'}</TableCell>
 
                 <TableCell className="py-3 text-gray-500 text-theme-sm dark:text-gray-400">
                   <div className="flex items-center gap-2">
@@ -167,19 +167,38 @@ export default function Transactions() {
                   <Badge size="sm" color={t.status === "Success" ? "success" : t.status === "Pending" ? "warning" : "error"}>{t.status}</Badge>
                 </TableCell>
 
-                <TableCell className="py-3 text-gray-500 text-theme-sm text-end dark:text-gray-400">
-                  <button className="inline-flex items-center rounded-full border border-gray-200 bg-white p-2 text-gray-400 shadow-theme-xs hover:bg-gray-50">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 5.5V5.51" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M12 12V12.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M12 18.5V18.51" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </button>
-                </TableCell>
+
               </TableRow>
             ))}
           </TableBody>
         </Table>
+      </div>
+
+      {/* Mobile layout: stacked cards */}
+      <div className="md:hidden space-y-3">
+        {filtered.map((t: Transaction) => (
+          <div key={t.id} className="flex items-center justify-between gap-3 rounded-lg border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-white/[0.03]">
+            <div className="flex items-center gap-3">
+              <div className="h-12 w-12 rounded-full overflow-hidden">
+                {t.countryImage && (
+                  <Image width={48} height={48} src={t.countryImage} alt={t.country} className="h-12 w-12" />
+                )}
+              </div>
+              <div>
+                <p className="font-medium text-gray-800 text-theme-sm dark:text-white/90">{t.name}</p>
+                {t.phone && <span className="text-gray-500 text-theme-xs">{t.phone}</span>}
+                <div className="text-theme-xs text-gray-400">{t.items !== undefined ? `No. of items : ${t.items}` : ''}</div>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-end gap-2">
+              <div className="text-gray-500 text-theme-sm dark:text-gray-400">{t.amount}</div>
+              <Badge size="sm" color={t.status === "Success" ? "success" : t.status === "Pending" ? "warning" : "error"}>{t.status}</Badge>
+            </div>
+
+
+          </div>
+        ))}
       </div>
     </div>
   );

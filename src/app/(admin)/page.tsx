@@ -4,7 +4,7 @@ import React from "react";
 
 
 import StatisticsChart from "@/components/ecommerce/StatisticsChart";
-import RecentOrders from "@/components/ecommerce/RecentOrders";
+
 
 import Transactions from "@/components/transactions/Transactions";
 

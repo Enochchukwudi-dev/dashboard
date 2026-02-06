@@ -29,27 +29,22 @@ type NavItem = {
 const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
-    name: "Dashboard",
-    subItems: [{ name: "See Laundry Activity", path: "/", pro: false }],
-  },
-  {
-    icon: <UserCircleIcon />,
-    name: "Owner Profile",
-    path: "/profile",
+    name: "Live Activity",
+    path: "/",
   },
 
   {
-    name: "Forms",
+    name: "Staff Activity",
     icon: <ListIcon />,
     subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
   },
   {
-    name: "Tables",
+    name: "Transaction History",
     icon: <TableIcon />,
     subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
   },
   {
-    name: "Pages",
+    name: "Customers",
     icon: <PageIcon />,
     subItems: [
       { name: "Blank Page", path: "/blank", pro: false },
@@ -61,7 +56,7 @@ const navItems: NavItem[] = [
 const othersItems: NavItem[] = [
   {
     icon: <PieChartIcon />,
-    name: "Charts",
+    name: "Overdue & Alerts",
     subItems: [
       { name: "Line Chart", path: "/line-chart", pro: false },
       { name: "Bar Chart", path: "/bar-chart", pro: false },
@@ -69,7 +64,7 @@ const othersItems: NavItem[] = [
   },
   {
     icon: <BoxCubeIcon />,
-    name: "UI Elements",
+    name: "Reports",
     subItems: [
       { name: "Alerts", path: "/alerts", pro: false },
       { name: "Avatar", path: "/avatars", pro: false },
@@ -81,8 +76,17 @@ const othersItems: NavItem[] = [
   },
   {
     icon: <PlugInIcon />,
-    name: "Authentication",
+    name: "Message Log",
     subItems: [
+      { name: "Sign In", path: "/signin", pro: false },
+      { name: "Sign Up", path: "/signup", pro: false },
+    ],
+  },
+  {
+    icon: <PlugInIcon />,
+    name: "Business Settings",
+    subItems: [
+      { name: "Owner Profile", path: "/profile", pro: false },
       { name: "Sign In", path: "/signin", pro: false },
       { name: "Sign Up", path: "/signup", pro: false },
     ],

@@ -6,18 +6,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "../context/SidebarContext";
 import {
-  BoxCubeIcon,
   CalenderIcon,
   ChevronDownIcon,
-  GridIcon,
   HorizontaLDots,
-  ListIcon,
-  PageIcon,
-  PieChartIcon,
   PlugInIcon,
-  TableIcon,
   UserCircleIcon,
 } from "../icons/index";
+import { ChartLine, UserCheck, Tag, UsersRound, TriangleAlert, ClipboardMinus, MailWarning, Settings } from "lucide-react";
 import SidebarWidget from "./SidebarWidget";
 
 type NavItem = {
@@ -29,24 +24,24 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   {
-    icon: <GridIcon />,
+    icon: <ChartLine className="w-4 h-4 text-blue-500" />,
     name: "Live Activity",
     path: "/",
   },
 
   {
     name: "Staff Activity",
-    icon: <ListIcon />,
+    icon: <UserCheck className="w-4 h-4 text-blue-500" />,
     subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
   },
   {
     name: "My Tickets",
-    icon: <TableIcon />,
+    icon: <Tag className="w-4 h-4 text-blue-500" />,
     path: "/my-tickets",
   },
   {
     name: "Customers",
-    icon: <PageIcon />,
+    icon: <UsersRound className="w-4 h-4 text-blue-500" />,
     subItems: [
       { name: "Blank Page", path: "/blank", pro: false },
       { name: "404 Error", path: "/error-404", pro: false },
@@ -56,7 +51,7 @@ const navItems: NavItem[] = [
 
 const othersItems: NavItem[] = [
   {
-    icon: <PieChartIcon />,
+    icon: <TriangleAlert className="w-4 h-4 text-yellow-500" />,
     name: "Overdue & Alerts",
     subItems: [
       { name: "Line Chart", path: "/line-chart", pro: false },
@@ -64,7 +59,7 @@ const othersItems: NavItem[] = [
     ],
   },
   {
-    icon: <BoxCubeIcon />,
+    icon: <ClipboardMinus className="w-4 h-4 text-blue-500" />,
     name: "Reports",
     subItems: [
       { name: "Alerts", path: "/alerts", pro: false },
@@ -76,7 +71,7 @@ const othersItems: NavItem[] = [
     ],
   },
   {
-    icon: <PlugInIcon />,
+    icon: <MailWarning className="w-4 h-4" />,
     name: "Message Log",
     subItems: [
       { name: "Sign In", path: "/signin", pro: false },
@@ -84,8 +79,8 @@ const othersItems: NavItem[] = [
     ],
   },
   {
-    icon: <PlugInIcon />,
-    name: "Business Settings",
+    icon: <Settings className="w-4 h-4 text-blue-500" />,
+    name: "Business Settings ",
     subItems: [
       { name: "Owner Profile", path: "/profile", pro: false },
       { name: "Sign In", path: "/signin", pro: false },

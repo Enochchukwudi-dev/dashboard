@@ -31,7 +31,7 @@ export default function StatisticsChart() {
 
       <div className="grid grid-cols-3 gap-4">
         <div className="text-center">
-          <p className="mt-1 text-xl font-semibold text-gray-800 dark:text-white/90">{today}</p>
+          <p className="mt-1 text-xl font-semibold text-gray-800 dark:text-yellow-50/90">{today}</p>
           
         </div>
          

@@ -30,21 +30,22 @@ export default function Transactions() {
           };
 
           const feed: FeedEvent[] = [
-            { id: 1, time: "09:12 AM", actor: "Chioma", action: "registered", ticketId: 4821, items: 6, amount: "₦4,500", type: "info" },
-            { id: 2, time: "09:28 AM", actor: "Musa", action: "marked", ticketId: 4821, meta: "Processing (Washing started)", type: "warning" },
-            { id: 3, time: "09:45 AM", actor: "Ada", action: "registered", ticketId: 4822, items: 3, type: "info" },
-            { id: 4, time: "10:03 AM", actor: "Musa", action: "marked", ticketId: 4821, meta: "Processing (Ironing)", type: "warning" },
-            { id: 5, time: "11:15 AM", actor: "Chioma", action: "marked", ticketId: 4821, meta: "Ready for Pickup", type: "info" },
-            { id: 6, time: "12:02 PM", actor: "Tunde", action: "registered", ticketId: 4823, items: 2, type: "info" },
-            { id: 7, time: "01:47 PM", actor: "Chioma", action: "marked", ticketId: 4821, meta: "Ready for Pickup", type: "info" },
-            { id: 8, time: "02:30 PM", actor: "Musa", action: "picked up", ticketId: 4824, items: 4, type: "success" },
-            { id: 9, time: "03:05 PM", actor: "Zainab", action: "registered", ticketId: 4825, items: 1, type: "info" },
-            { id: 10, time: "03:50 PM", actor: "Musa", action: "completed Pickup for", ticketId: 4821, items: 6, meta: "6 items confirmed", type: "success" },
-            { id: 11, time: "04:10 PM", actor: "Musa", action: "received payment", ticketId: 4821, amount: "₦4,500", type: "success" },
+            { id: 1, time: "09:12 AM", actor: "Staff 2", action: "registered", ticketId: 4821, items: 6, amount: "₦4,500", type: "info" },
+            { id: 2, time: "09:28 AM", actor: "Staff 1", action: "marked", ticketId: 4821, meta: "Processing (Washing started)", type: "warning" },
+            { id: 3, time: "09:45 AM", actor: "Staff 1", action: "registered", ticketId: 4822, items: 3, type: "info" },
+            { id: 4, time: "10:03 AM", actor: "Staff 1", action: "marked", ticketId: 4821, meta: "Processing (Ironing)", type: "warning" },
+            { id: 5, time: "11:15 AM", actor: "Staff 2", action: "marked", ticketId: 4821, meta: "Ready for Pickup", type: "info" },
+            { id: 6, time: "12:02 PM", actor: "Staff 1", action: "registered", ticketId: 4823, items: 2, type: "info" },
+            { id: 7, time: "01:47 PM", actor: "Staff 2", action: "marked", ticketId: 4821, meta: "Ready for Pickup", type: "info" },
+            { id: 8, time: "02:30 PM", actor: "Staff 1", action: "picked up", ticketId: 4824, items: 4, type: "success" },
+            { id: 9, time: "03:05 PM", actor: "Staff 3", action: "registered", ticketId: 4825, items: 1, type: "info" },
+            { id: 10, time: "03:50 PM", actor: "Staff 1", action: "completed Pickup for", ticketId: 4821, items: 6, meta: "6 items confirmed", type: "success" },
+            { id: 11, time: "04:10 PM", actor: "Staff 1", action: "received payment", ticketId: 4821, amount: "₦4,500", type: "success" },
             { id: 12, time: "04:23 PM", actor: "Femi", action: "marked", ticketId: 4826, meta: "Processing (Stain treatment)", type: "warning" },
-            { id: 13, time: "04:40 PM", actor: "Chioma", action: "registered", ticketId: 4827, items: 5, type: "info" },
-            { id: 14, time: "05:05 PM", actor: "Musa", action: "marked", ticketId: 4827, meta: "Ready for Pickup", type: "info" },
-            { id: 15, time: "05:30 PM", actor: "Musa", action: "received payment", ticketId: 4824, amount: "₦1,800", type: "success" },
+            { id: 13, time: "04:40 PM", actor: "Staff 2", action: "registered", ticketId: 4827, items: 5, type: "info" },
+            { id: 14, time: "05:05 PM", actor: "Staff 1", action: "marked", ticketId: 4827, meta: "Ready for Pickup", type: "info" },
+            { id: 15, time: "05:30 PM", actor: "Staff 1", action: "received payment", ticketId: 4824, amount: "₦1,800", type: "success" },
+            { id: 16, time: "12:30 PM", actor: "Staff 2", action: "registered", ticketId: 4828, items: 2, type: "info" },
           ];
 
           const getInitials = (name: string) => {
@@ -81,7 +82,7 @@ export default function Transactions() {
           // Build a display-friendly action string
           const displayAction = (e: FeedEvent) => {
             if (isReceivedPayment(e)) return "received payment";
-            if (isMarkedReady(e)) return "ready for pickup";
+            if (isMarkedReady(e)) return "marked ready for pickup";
             if (isPickedUp(e)) return "picked up";
             if (isCompletedPickup(e)) return "completed pickup";
             return e.action;

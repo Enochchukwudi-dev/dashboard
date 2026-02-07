@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
-import Badge from "../ui/badge/Badge";
-import { ArrowDownIcon, ArrowUpIcon, BoxIconLine, GroupIcon } from "@/icons";
+import TimeframeDropdown from "../ui/dropdown/TimeframeDropdown";
+import { BoxIconLine, GroupIcon } from "@/icons";
+import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export const EcommerceMetrics = () => {
@@ -17,26 +18,24 @@ export const EcommerceMetrics = () => {
         <div className="flex items-end justify-between mt-5">
           <div>
             <span className="text-sm text-gray-500 dark:text-gray-400">
-              Clothes Received Today
+              Total Clothes Received  -Per item
             </span>
             <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
               765
             </h4>
           </div>
           <div className="absolute top-4 right-4">
-            <Badge color="success">
-              <ArrowUpIcon />
-              11.01%
-            </Badge>
+            <TimeframeDropdown />
           </div>
 
           <button
             type="button"
             onClick={() => router.push('/my-tickets')}
             aria-label="View Tickets"
-            className="absolute bottom-4 right-4 inline-flex items-center px-3 py-1.5 gap-2 rounded-md text-sm font-semibold bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-yellow-400 dark:bg-gray-900 dark:border-gray-800 dark:text-white dark:hover:bg-gray-800"
+            className="absolute bottom-4 right-4 inline-flex items-center px-3 py-1.5 gap-2 rounded-md text-sm font-semibold bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-yellow-400 dark:bg-gray-900/10 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800"
           >
             View Tickets
+            <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>
@@ -49,8 +48,8 @@ export const EcommerceMetrics = () => {
         </div>
         <div className="flex items-end justify-between mt-5">
           <div>
-            <span className="text-sm text-gray-500 dark:text-gray-00">
-             Clothes in Process
+            <span className="text-sm text-gray-500 dark:text-gray-400">
+             Clothes Received - Per Customer
             </span>
             <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
               53
@@ -58,18 +57,16 @@ export const EcommerceMetrics = () => {
           </div>
 
           <div className="absolute top-4 right-4">
-            <Badge color="error">
-              <ArrowDownIcon className="text-error-500" />
-              9.05%
-            </Badge>
+            <TimeframeDropdown />
           </div>
 
           <button
             type="button"
             aria-label="View Ticket: Active / Pending Tickets (Today)"
-            className="absolute bottom-4 right-4 inline-flex items-center px-3 py-1.5 gap-2 rounded-md text-sm font-semibold bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-yellow-400 dark:bg-gray-900 dark:border-gray-800 dark:text-white dark:hover:bg-gray-800"
+            className="absolute bottom-4 right-4 inline-flex items-center px-3 py-1.5 gap-2 rounded-md text-sm font-semibold bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-yellow-400 dark:bg-gray-900/10 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800"
           >
            View Processing
+           <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>
@@ -83,7 +80,7 @@ export const EcommerceMetrics = () => {
         <div className="flex items-end justify-between mt-5">
           <div>
             <span className="text-sm text-gray-500 dark:text-gray-400">
-             Clothes ready for Pickup
+              Clothes ready for Pickup
             </span>
             <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
               14
@@ -91,18 +88,16 @@ export const EcommerceMetrics = () => {
           </div>
 
           <div className="absolute top-4 right-4">
-            <Badge color="success">
-              <ArrowUpIcon className="text-success-500" />
-              19.05%
-            </Badge>
+            <TimeframeDropdown />
           </div>
 
           <button
             type="button"
             aria-label="View Ticket: Completed Tickets Today (Paid / Completed)"
-            className="absolute bottom-4 right-4 inline-flex items-center px-3 py-1.5 gap-2 rounded-md text-sm font-semibold bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-yellow-400 dark:bg-gray-900 dark:border-gray-800 dark:text-white dark:hover:bg-gray-800"
+            className="absolute bottom-4 right-4 inline-flex items-center px-3 py-1.5 gap-2 rounded-md text-sm font-semibold bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-yellow-400 dark:bg-gray-900/10 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800"
           >
-            Vie Ready Clothes
+            View Ready Items
+            <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>
@@ -122,18 +117,16 @@ export const EcommerceMetrics = () => {
           </div>
 
           <div className="absolute top-4 right-4">
-            <Badge color="success">
-              <ArrowUpIcon className="text-success-500" />
-              19.05%
-            </Badge>
+            <TimeframeDropdown />
           </div>
 
           <button
             type="button"
             aria-label="View Ticket: Completed Tickets Today (Paid / Completed)"
-            className="absolute bottom-4 right-4 inline-flex items-center px-3 py-1.5 gap-2 rounded-md text-sm font-semibold bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-yellow-400 dark:bg-gray-900 dark:border-gray-800 dark:text-white dark:hover:bg-gray-800"
+            className="absolute bottom-4 right-4 inline-flex items-center px-3 py-1.5 gap-2 rounded-md text-sm font-semibold bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-yellow-400 dark:bg-gray-900/10 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800"
           >
             View Pickups
+            <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>

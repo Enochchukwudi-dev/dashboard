@@ -2,10 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import Avatar from "@/components/ui/avatar/Avatar";
-import CircleCheckBig from "@/components/ui/icons/CircleCheckBig";
-import { RefreshCw } from "lucide-react";
 import Badge from "@/components/ui/badge/Badge";
-import Button from "@/components/ui/button/Button";
 
 type Ticket = {
   id: number;
@@ -16,17 +13,20 @@ type Ticket = {
   status: "Collected" | "Processing" | "Unpicked";
 };
 
-export default function MyTickets() {
+export default function MyTransac() {
   const [activeTab, setActiveTab] = useState<"all" | "collected" | "processing" | "unpicked">("all");
   const [query, setQuery] = useState("");
 
-  const tickets = useMemo<Ticket[]>(() => [
-    { id: 1, name: "Chinedu Okafor", phone: "08011223344", items: 3, amount: 3000, status: "Collected" },
-    { id: 2, name: "Aisha Bello", phone: "08022334455", items: 5, amount: 5000, status: "Processing" },
-    { id: 3, name: "Emeka Obi", phone: "08033445566", items: 17, amount: 17000, status: "Collected" },
-    { id: 4, name: "Ngozi Nwosu", phone: "08044556677", items: 3, amount: 3000, status: "Collected" },
-    { id: 5, name: "Kelechi Ibe", phone: "08055667788", items: 5, amount: 5000, status: "Processing" },
-  ], []);
+  const tickets = useMemo<Ticket[]>(
+    () => [
+      { id: 1, name: "Chinedu Okafor", phone: "08011223344", items: 3, amount: 3000, status: "Collected" },
+      { id: 2, name: "Aisha Bello", phone: "08022334455", items: 5, amount: 5000, status: "Processing" },
+      { id: 3, name: "Emeka Obi", phone: "08033445566", items: 17, amount: 17000, status: "Collected" },
+      { id: 4, name: "Ngozi Nwosu", phone: "08044556677", items: 3, amount: 3000, status: "Collected" },
+      { id: 5, name: "Kelechi Ibe", phone: "08055667788", items: 5, amount: 5000, status: "Processing" },
+    ],
+    []
+  );
 
   const filtered = useMemo(() => {
     return tickets.filter((t) => {
@@ -43,20 +43,18 @@ export default function MyTickets() {
 
   return (
     <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white px-4 pb-4 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">Clothes Received </h3>
-     
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">Transaction History</h3>
         </div>
 
-        <div className="mt-3 sm:mt-0 flex items-center gap-2">
+        <div className="flex items-center gap-2">
           <label htmlFor="ticket-filter-mobile" className="sr-only">Filter tickets</label>
           <select
             id="ticket-filter-mobile"
             value={activeTab}
             onChange={(e) => setActiveTab(e.target.value as "all" | "collected" | "processing" | "unpicked")}
-            className="block sm:hidden rounded-md border bg-white dark:bg-gray-800 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 border-gray-800 dark:border-gray-700 shadow-sm focus:outline-none  focus:ring-success-500 dark:focus:ring-success-400"
-            style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "San Francisco", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
+            className="block sm:hidden rounded-md border bg-white dark:bg-gray-800 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 border-gray-800 dark:border-gray-700 shadow-sm focus:outline-none"
           >
             <option value="all">All</option>
             <option value="collected">Collected</option>
@@ -101,19 +99,11 @@ export default function MyTickets() {
         </div>
       </div>
 
-    
-
       <div className="mt-4 space-y-3">
         {filtered.map((t) => (
           <div key={t.id} className="rounded-lg border border-gray-100 bg-white p-3 shadow-sm dark:border-gray-800 dark:bg-white/[0.03] flex items-center justify-between">
             <div className="flex items-center gap-3">
-              {t.status === "Collected" ? (
-                <CircleCheckBig className="h-6 w-6 text-success-500" />
-              ) : t.status === "Processing" ? (
-                <RefreshCw className="h-6 w-6 text-yellow-600" />
-              ) : (
-                <Avatar src="/images/avatar.svg" alt={t.name} size="medium" />
-              )}
+              <Avatar src="/images/avatar.svg" alt={t.name} size="medium" />
               <div className="min-w-0">
                 <div className="text-sm font-medium text-gray-800 dark:text-white/90">{t.name}</div>
                 <div className="text-xs text-gray-400">{t.phone} <span className="block">No. of items : {t.items}</span></div>

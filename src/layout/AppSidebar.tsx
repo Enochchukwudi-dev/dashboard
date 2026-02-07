@@ -12,7 +12,7 @@ import {
   PlugInIcon,
   UserCircleIcon,
 } from "../icons/index";
-import { ChartLine, UserCheck, Tag, UsersRound, TriangleAlert, ClipboardMinus, MailWarning, Settings } from "lucide-react";
+import { ChartLine, UserCheck, Tag, UsersRound, TriangleAlert, ClipboardMinus, MailWarning, Settings, Wallet } from "lucide-react";
 import SidebarWidget from "./SidebarWidget";
 
 type NavItem = {
@@ -28,11 +28,16 @@ const navItems: NavItem[] = [
     name: "Live Activity",
     path: "/",
   },
+  {
+    name: "Transactions",
+    icon: <Wallet  className="w-4 h-4 text-blue-500" />,
+    path: "/transactions",
+  },
 
   {
-    name: "Staff Activity",
+    name: "Staff",
     icon: <UserCheck className="w-4 h-4 text-blue-500" />,
-    subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
+    path: "/staff",
   },
   {
     name: "My Tickets",
@@ -42,10 +47,7 @@ const navItems: NavItem[] = [
   {
     name: "Customers",
     icon: <UsersRound className="w-4 h-4 text-blue-500" />,
-    subItems: [
-      { name: "Blank Page", path: "/blank", pro: false },
-      { name: "404 Error", path: "/error-404", pro: false },
-    ],
+    path: "/customers",
   },
 ];
 
@@ -54,37 +56,18 @@ const othersItems: NavItem[] = [
     icon: <TriangleAlert className="w-4 h-4 text-yellow-500" />,
     name: "Overdue & Alerts",
     subItems: [
-      { name: "Line Chart", path: "/line-chart", pro: false },
-      { name: "Bar Chart", path: "/bar-chart", pro: false },
+      { name: "Overdue Clothes", path: "/line-chart", pro: false },
+      { name: "Messages", path: "/bar-chart", pro: false },
     ],
   },
-  {
-    icon: <ClipboardMinus className="w-4 h-4 text-blue-500" />,
-    name: "Reports",
-    subItems: [
-      { name: "Alerts", path: "/alerts", pro: false },
-      { name: "Avatar", path: "/avatars", pro: false },
-      { name: "Badge", path: "/badge", pro: false },
-      { name: "Buttons", path: "/buttons", pro: false },
-      { name: "Images", path: "/images", pro: false },
-      { name: "Videos", path: "/videos", pro: false },
-    ],
-  },
-  {
-    icon: <MailWarning className="w-4 h-4" />,
-    name: "Message Log",
-    subItems: [
-      { name: "Sign In", path: "/signin", pro: false },
-      { name: "Sign Up", path: "/signup", pro: false },
-    ],
-  },
+ 
+
   {
     icon: <Settings className="w-4 h-4 text-blue-500" />,
     name: "Business Settings ",
     subItems: [
       { name: "Owner Profile", path: "/profile", pro: false },
-      { name: "Sign In", path: "/signin", pro: false },
-      { name: "Sign Up", path: "/signup", pro: false },
+
     ],
   },
 ];

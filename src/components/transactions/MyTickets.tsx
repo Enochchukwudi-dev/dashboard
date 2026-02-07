@@ -18,13 +18,13 @@ export default function MyTickets() {
   const [activeTab, setActiveTab] = useState<"all" | "collected" | "processing" | "unpicked">("all");
   const [query, setQuery] = useState("");
 
-  const tickets: Ticket[] = [
+  const tickets = useMemo<Ticket[]>(() => [
     { id: 1, name: "Chinedu Okafor", phone: "08011223344", items: 3, amount: 3000, status: "Collected" },
     { id: 2, name: "Aisha Bello", phone: "08022334455", items: 5, amount: 5000, status: "Processing" },
     { id: 3, name: "Emeka Obi", phone: "08033445566", items: 17, amount: 17000, status: "Collected" },
     { id: 4, name: "Ngozi Nwosu", phone: "08044556677", items: 3, amount: 3000, status: "Collected" },
     { id: 5, name: "Kelechi Ibe", phone: "08055667788", items: 5, amount: 5000, status: "Processing" },
-  ];
+  ], []);
 
   const filtered = useMemo(() => {
     return tickets.filter((t) => {
@@ -40,36 +40,58 @@ export default function MyTickets() {
   const formatCurrency = (n: number) => `₦${n.toLocaleString()}`;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-4 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
+    <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white px-4 pb-4 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">Clothes Received Today</h3>
-          <p className="text-sm text-gray-500 mt-1">See items received today</p>
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">Clothes Received </h3>
+     
         </div>
 
         <div className="mt-3 sm:mt-0 flex items-center gap-2">
-          <div className="flex items-center rounded-full bg-gray-50 p-1.5 gap-1">
+          <label htmlFor="ticket-filter-mobile" className="sr-only">Filter tickets</label>
+          <select
+            id="ticket-filter-mobile"
+            value={activeTab}
+            onChange={(e) => setActiveTab(e.target.value as "all" | "collected" | "processing" | "unpicked")}
+            className="block sm:hidden rounded-md border bg-white dark:bg-gray-800 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 border-gray-800 dark:border-gray-700 shadow-sm focus:outline-none  focus:ring-success-500 dark:focus:ring-success-400"
+            style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "San Francisco", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
+          >
+            <option value="all">All</option>
+            <option value="collected">Collected</option>
+            <option value="processing">Processing</option>
+            <option value="unpicked">Unpicked</option>
+          </select>
+
+          <div role="tablist" aria-label="Ticket filters" className="hidden sm:flex items-center rounded-full bg-gray-50 p-1.5 gap-1 whitespace-nowrap overflow-x-auto sm:overflow-visible dark:bg-white/[0.03]">
             <button
+              role="tab"
+              aria-selected={activeTab === "all"}
               onClick={() => setActiveTab("all")}
-              className={`rounded-full px-3 py-1 text-sm font-medium transition ${activeTab === "all" ? "bg-success-50 text-success-700 shadow-sm" : "text-gray-500 hover:bg-white"}`}
+              className={`flex-shrink-0 rounded-full px-2 py-0.5 text-xs sm:px-3 sm:py-1 sm:text-sm font-medium transition ${activeTab === "all" ? "bg-success-50 text-success-700 shadow-sm dark:bg-success-900/20 dark:text-success-300" : "text-gray-500 hover:bg-white dark:text-gray-300 dark:hover:bg-white/[0.03]"}`}
             >
               All
             </button>
             <button
+              role="tab"
+              aria-selected={activeTab === "collected"}
               onClick={() => setActiveTab("collected")}
-              className={`rounded-full px-3 py-1 text-sm font-medium transition ${activeTab === "collected" ? "bg-success-50 text-success-700 shadow-sm" : "text-gray-500 hover:bg-white"}`}
+              className={`flex-shrink-0 rounded-full px-2 py-0.5 text-xs sm:px-3 sm:py-1 sm:text-sm font-medium transition ${activeTab === "collected" ? "bg-success-50 text-success-700 shadow-sm dark:bg-success-900/20 dark:text-success-300" : "text-gray-500 hover:bg-white dark:text-gray-300 dark:hover:bg-white/[0.03]"}`}
             >
               Collected
             </button>
             <button
+              role="tab"
+              aria-selected={activeTab === "processing"}
               onClick={() => setActiveTab("processing")}
-              className={`rounded-full px-3 py-1 text-sm font-medium transition ${activeTab === "processing" ? "bg-yellow-50 text-yellow-600 shadow-sm" : "text-gray-500 hover:bg-white"}`}
+              className={`flex-shrink-0 rounded-full px-2 py-0.5 text-xs sm:px-3 sm:py-1 sm:text-sm font-medium transition ${activeTab === "processing" ? "bg-yellow-50 text-yellow-600 shadow-sm dark:bg-yellow-900/20 dark:text-yellow-300" : "text-gray-500 hover:bg-white dark:text-gray-300 dark:hover:bg-white/[0.03]"}`}
             >
               Processing
             </button>
             <button
+              role="tab"
+              aria-selected={activeTab === "unpicked"}
               onClick={() => setActiveTab("unpicked")}
-              className={`rounded-full px-3 py-1 text-sm font-medium transition ${activeTab === "unpicked" ? "bg-gray-100 text-gray-700 shadow-sm" : "text-gray-500 hover:bg-white"}`}
+              className={`flex-shrink-0 rounded-full px-2 py-0.5 text-xs sm:px-3 sm:py-1 sm:text-sm font-medium transition ${activeTab === "unpicked" ? "bg-gray-100 text-gray-700 shadow-sm dark:bg-gray-700 dark:text-white/90" : "text-gray-500 hover:bg-white dark:text-gray-300 dark:hover:bg-white/[0.03]"}`}
             >
               Unpicked
             </button>
@@ -77,24 +99,7 @@ export default function MyTickets() {
         </div>
       </div>
 
-      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        <div className="flex items-center gap-3 rounded-lg border border-gray-100 bg-white px-3 py-2 shadow-sm dark:border-gray-800 dark:bg-white/[0.02]">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
-          </svg>
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search here..."
-            className="w-full bg-transparent outline-none text-sm text-gray-600 placeholder:text-gray-400"
-          />
-        </div>
-
-        <div className="flex gap-3">
-          <Button variant="outline" size="sm" className="flex-1 justify-center" startIcon={<svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M3 4.5h18M7 9h10M9 13.5h6M10 18h4"/></svg>}>Filter</Button>
-          <Button variant="outline" size="sm" className="flex-1 justify-center">Export Data</Button>
-        </div>
-      </div>
+    
 
       <div className="mt-4 space-y-3">
         {filtered.map((t) => (

@@ -129,11 +129,11 @@ export default function Transactions() {
                           </div>
 
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-start gap-3 md:gap-4">
+                            <div className="flex flex-col md:flex-row items-start gap-3 md:gap-4">
                               <div className="flex-1">
-                                <div className="flex items-center gap-2">
+                                <div className="flex md:flex-row flex-col md:items-center items-start gap-2">
                                   <span className="text-sm font-medium text-gray-800 dark:text-white/90">{e.actor}</span>
-                                  <span className="text-xs text-gray-500">{e.action} • Ticket #{e.ticketId}{e.items ? ` • ${e.items} items` : ''}</span>
+                                  <div className="text-xs text-gray-500 mt-1 md:mt-0">-{e.action} • Ticket #{e.ticketId}{e.items ? ` • ${e.items} items` : ''}</div>
                                 </div>
 
                                 {e.meta && <div className="text-xs text-gray-400 mt-1 truncate">{e.meta}</div>}
@@ -147,7 +147,7 @@ export default function Transactions() {
                                 )}
                               </div>
 
-                              <div className="text-xs text-gray-400 whitespace-nowrap">{e.time}</div>
+                              <div className="text-xs text-gray-400 whitespace-nowrap md:ml-2 md:mt-0 mt-2">{e.time}</div>
                             </div>
                           </div>
                         </div>
@@ -189,11 +189,11 @@ export default function Transactions() {
                             </div>
 
                             <div className="flex-1 min-w-0">
-                              <div className="flex items-start gap-3 md:gap-4">
+                              <div className="flex flex-col md:flex-row items-start gap-3 md:gap-4">
                                 <div className="flex-1">
-                                  <div className="flex items-center gap-2">
+                                  <div className="flex md:flex-row flex-col md:items-center items-start gap-2">
                                     <span className="text-sm font-medium text-gray-800 dark:text-white/90">{e.actor}</span>
-                                    <span className="text-xs text-gray-500">{e.action} • Ticket #{e.ticketId}{e.items ? ` • ${e.items} items` : ''}</span>
+                                    <div className="text-xs text-gray-500 mt-1 md:mt-0">-{e.action} • Ticket #{e.ticketId}{e.items ? ` • ${e.items} items` : ''}</div>
                                   </div>
 
                                   {e.meta && <div className="text-xs text-gray-400 mt-1 truncate">{e.meta}</div>}
@@ -207,7 +207,7 @@ export default function Transactions() {
                                   )}
                                 </div>
 
-                                <div className="text-xs text-gray-400 whitespace-nowrap">{e.time}</div>
+                                <div className="text-xs text-gray-400 whitespace-nowrap md:ml-2 md:mt-0 mt-2">{e.time}</div>
                               </div>
                             </div>
                           </div>

@@ -39,9 +39,9 @@ const navItems: NavItem[] = [
     subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
   },
   {
-    name: "Transaction History",
+    name: "My Tickets",
     icon: <TableIcon />,
-    subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
+    path: "/my-tickets",
   },
   {
     name: "Customers",
@@ -255,9 +255,10 @@ const AppSidebar: React.FC = () => {
       });
     });
 
-    // If no submenu item matches, close the open submenu
+    // If no submenu item matches, close the open submenu (defer setState to avoid synchronous updates)
     if (!submenuMatched) {
-      setOpenSubmenu(null);
+      // defer to next frame to avoid calling setState synchronously within effect
+      requestAnimationFrame(() => setOpenSubmenu(null));
     }
   }, [pathname,isActive]);
 

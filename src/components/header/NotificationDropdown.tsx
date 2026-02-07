@@ -8,6 +8,8 @@ import { DropdownItem } from "../ui/dropdown/DropdownItem";
 export default function NotificationDropdown() {
   const [isOpen, setIsOpen] = useState(false);
   const [notifying, setNotifying] = useState(true);
+  // Replace small dot with a numeric badge
+  const notificationCount = 23;
 
   function toggleDropdown() {
     setIsOpen(!isOpen);
@@ -27,13 +29,14 @@ export default function NotificationDropdown() {
         className="relative dropdown-toggle flex items-center justify-center text-gray-500 transition-colors bg-white border border-gray-200 rounded-full hover:text-gray-700 h-11 w-11 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
         onClick={handleClick}
       >
-        <span
-          className={`absolute right-0 top-0.5 z-10 h-2 w-2 rounded-full bg-orange-400 ${
-            !notifying ? "hidden" : "flex"
-          }`}
-        >
-          <span className="absolute inline-flex w-full h-full bg-orange-400 rounded-full opacity-75 animate-ping"></span>
-        </span>
+        {notifying && notificationCount > 0 && (
+          <span
+            aria-label={`${notificationCount} notifications`}
+            className="absolute -top-1 -right-3 z-10 inline-flex items-center justify-center px-1.5 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-semibold"
+          >
+            {notificationCount}
+          </span>
+        )}
         <svg
           className="fill-current"
           width="20"

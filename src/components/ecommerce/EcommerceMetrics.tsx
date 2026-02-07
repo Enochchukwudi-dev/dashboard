@@ -2,8 +2,10 @@
 import React from "react";
 import Badge from "../ui/badge/Badge";
 import { ArrowDownIcon, ArrowUpIcon, BoxIconLine, GroupIcon } from "@/icons";
+import { useRouter } from "next/navigation";
 
 export const EcommerceMetrics = () => {
+  const router = useRouter();
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
       {/* <!-- Metric Item Start --> */}
@@ -30,10 +32,11 @@ export const EcommerceMetrics = () => {
 
           <button
             type="button"
-            aria-label="View Ticket: Total Tickets (Lifetime)"
+            onClick={() => router.push('/my-tickets')}
+            aria-label="View Tickets"
             className="absolute bottom-4 right-4 inline-flex items-center px-3 py-1.5 gap-2 rounded-md text-sm font-semibold bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-yellow-400 dark:bg-gray-900 dark:border-gray-800 dark:text-white dark:hover:bg-gray-800"
           >
-            See all
+            View Tickets
           </button>
         </div>
       </div>
@@ -66,7 +69,7 @@ export const EcommerceMetrics = () => {
             aria-label="View Ticket: Active / Pending Tickets (Today)"
             className="absolute bottom-4 right-4 inline-flex items-center px-3 py-1.5 gap-2 rounded-md text-sm font-semibold bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-yellow-400 dark:bg-gray-900 dark:border-gray-800 dark:text-white dark:hover:bg-gray-800"
           >
-           View Active Jobs
+           View Processing
           </button>
         </div>
       </div>
@@ -99,7 +102,7 @@ export const EcommerceMetrics = () => {
             aria-label="View Ticket: Completed Tickets Today (Paid / Completed)"
             className="absolute bottom-4 right-4 inline-flex items-center px-3 py-1.5 gap-2 rounded-md text-sm font-semibold bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-yellow-400 dark:bg-gray-900 dark:border-gray-800 dark:text-white dark:hover:bg-gray-800"
           >
-            Payments Today
+            Vie Ready Clothes
           </button>
         </div>
       </div>
@@ -130,7 +133,7 @@ export const EcommerceMetrics = () => {
             aria-label="View Ticket: Completed Tickets Today (Paid / Completed)"
             className="absolute bottom-4 right-4 inline-flex items-center px-3 py-1.5 gap-2 rounded-md text-sm font-semibold bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-yellow-400 dark:bg-gray-900 dark:border-gray-800 dark:text-white dark:hover:bg-gray-800"
           >
-            Payments Today
+            View Pickups
           </button>
         </div>
       </div>

@@ -265,42 +265,185 @@
 @utility custom-scrollbar {
   &::-webkit-scrollbar {
     @apply size-1.5;
+    width: 10px;
+    height: 10px;
   }
 
   &::-webkit-scrollbar-track {
     @apply rounded-full;
+    background: transparent;
   }
 
+  /* Always-visible neutral thumb: black in light, white in dark */
   &::-webkit-scrollbar-thumb {
-    @apply bg-gray-200 rounded-full dark:bg-gray-700;
+    background-color: #000000 !important;
+    border-radius: 9999px !important;
+    opacity: 1 !important;
   }
 }
 
 .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #344054;
+  background-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Firefox support for custom-scrollbar */
+.custom-scrollbar {
+  scrollbar-color: #000000 transparent !important;
+  scrollbar-width: auto !important;
+}
+.dark .custom-scrollbar {
+  scrollbar-color: #ffffff transparent !important;
+  scrollbar-width: auto !important;
+}
+
+/* Yellow scrollbar utility retained but using the same neutral visible styling (black/white) */
+@utility yellow-scrollbar {
+  &::-webkit-scrollbar {
+    @apply size-1.5;
+    width: 10px;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply rounded-full;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #000000 !important;
+    border-radius: 9999px !important;
+    opacity: 1 !important;
+  }
+
+  /* Firefox */
+  scrollbar-color: #000000 transparent !important;
+}
+
+.dark .yellow-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #ffffff !important;
+}
+.dark .yellow-scrollbar {
+  scrollbar-color: #ffffff transparent !important;
+}
+
+/* Strong, scoped override for the transactions modal: neutral always-visible thumb */
+.transactions-modal .yellow-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.transactions-modal .yellow-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 9999px;
+}
+.transactions-modal .yellow-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #000000 !important;
+  border-radius: 9999px !important;
+  opacity: 1 !important;
+}
+.dark .transactions-modal .yellow-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #ffffff !important;
+  opacity: 1 !important;
+}
+.transactions-modal .yellow-scrollbar {
+  /* Firefox */
+  scrollbar-color: #000000 transparent !important;
+}
+.dark .transactions-modal .yellow-scrollbar {
+  scrollbar-color: #ffffff transparent !important;
+}
+
+/* Universal override: make any scrollbar inside transactions-modal visible and neutral (black on light, white on dark) */
+.transactions-modal *::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+}
+.transactions-modal *::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 9999px;
+}
+.transactions-modal *::-webkit-scrollbar-thumb {
+  background-color: #000000 !important; /* black in light mode */
+  border-radius: 9999px !important;
+  opacity: 1 !important; /* always visible */
+}
+.dark .transactions-modal *::-webkit-scrollbar-thumb {
+  background-color: #ffffff !important; /* white in dark mode */
+  opacity: 1 !important;
+}
+.transactions-modal *::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Firefox */
+.transactions-modal * {
+  scrollbar-color: #000000 transparent !important; /* black thumb */
+  scrollbar-width: auto !important; /* ensure visible */
+}
+.dark .transactions-modal * {
+  scrollbar-color: #ffffff transparent !important; /* white thumb in dark */
+  scrollbar-width: auto !important;
 }
 
 @utility thin-scrollbar {
+  /* Reserve space for scrollbar to avoid layout shift and keep it visible */
+  scrollbar-gutter: stable;
+
   &::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
 
+  /* Give track a subtle contrast so thumb is visible */
   &::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.03);
+  }
+
+  /* Light mode: darker thumb for contrast; always visible (no hover-only transparency) */
+  &::-webkit-scrollbar-thumb {
+    background-color: #000000 !important;
+    border-radius: 9999px;
+    opacity: 1 !important;
+    -webkit-appearance: none;
+    transition: none;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+  }
+
+  /* Hover state to make it slightly bolder */
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0,0,0,0.9) !important;
+  }
+
+  /* Show the corner when both scrollbars are present */
+  &::-webkit-scrollbar-corner {
     background: transparent;
   }
 
-  &::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 rounded-full;
-  }
-
-  /* Firefox */
+  /* Firefox - set both thumb and track colors explicitly */
   scrollbar-width: thin;
-  scrollbar-color: rgba(148,163,184,0.6) transparent;
+  scrollbar-color: rgba(0,0,0,0.9) rgba(0,0,0,0.04);
 }
 
+/* Dark mode: use white thumb for contrast and set Firefox color */
 .dark .thin-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #475569;
+  background-color: #ffffff !important;
+  opacity: 1 !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.18);
+}
+
+.dark .thin-scrollbar {
+  scrollbar-color: rgba(255,255,255,0.9) rgba(255,255,255,0.06);
+}
+
+/* Dark mode: use white thumb for contrast and set Firefox color */
+.dark .thin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  opacity: 1;
+}
+
+.dark .thin-scrollbar {
+  scrollbar-color: rgba(255,255,255,0.8) transparent;
 }
 
 @layer utilities {
@@ -654,6 +797,50 @@ span.flatpickr-weekday,
 .fc.fc-media-screen {
   @apply min-h-screen;
 }
+
+/*
+  Universal scrollbar color override:
+  - Light mode: black thumb
+  - Dark mode: white thumb
+  Cover multiple dark-mode attribute/class patterns to ensure the
+  thumb is white when dark mode is active regardless of how it's applied.
+*/
+/* WebKit browsers (Chrome, Edge, Safari, Opera) */
+*:where(:not(.no-scrollbar))::-webkit-scrollbar,
+:where(html,body):where(:not(.no-scrollbar))::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*:where(:not(.no-scrollbar))::-webkit-scrollbar-track,
+:where(html,body):where(:not(.no-scrollbar))::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Default (light): black thumb */
+*:where(:not(.no-scrollbar))::-webkit-scrollbar-thumb,
+:where(html,body):where(:not(.no-scrollbar))::-webkit-scrollbar-thumb {
+  background-color: #000000 !important;
+  border-radius: 9999px !important;
+  opacity: 1 !important;
+}
+
+/* Dark mode variants: .dark on ancestor OR data-theme="dark" OR body/html having the class */
+:is(.dark, html.dark, body.dark, [data-theme="dark"])::-webkit-scrollbar-thumb,
+:is(.dark, html.dark, body.dark, [data-theme="dark"]) *::-webkit-scrollbar-thumb {
+  background-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Firefox */
+*:where(:not(.no-scrollbar)) {
+  scrollbar-color: #000000 transparent !important;
+}
+:is(.dark, html.dark, body.dark, [data-theme="dark"]) *,
+:is(.dark, html.dark, body.dark, [data-theme="dark"]) {
+  scrollbar-color: #ffffff transparent !important;
+}
+
 
 .input-date-icon::-webkit-inner-spin-button,
 .input-date-icon::-webkit-calendar-picker-indicator {

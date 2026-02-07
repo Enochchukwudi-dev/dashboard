@@ -8,6 +8,7 @@ interface ModalProps {
   children: React.ReactNode;
   showCloseButton?: boolean; // New prop to control close button visibility
   isFullscreen?: boolean; // Default to false for backwards compatibility
+  backdropClassName?: string; // Optional override for backdrop styling
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -17,6 +18,7 @@ export const Modal: React.FC<ModalProps> = ({
   className,
   showCloseButton = true, // Default to true for backwards compatibility
   isFullscreen = false,
+  backdropClassName,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -54,11 +56,15 @@ export const Modal: React.FC<ModalProps> = ({
     ? "w-full h-full"
     : "relative w-full rounded-3xl bg-white  dark:bg-gray-900";
 
+  // Allow callers to override the backdrop style; default preserves previous semi-opaque gray + blur
+  const backdropClass =
+    backdropClassName ?? "fixed inset-0 h-full w-full bg-gray-400/50 backdrop-blur-[32px]";
+
   return (
     <div className="fixed inset-0 flex items-center justify-center overflow-y-auto modal z-99999">
       {!isFullscreen && (
         <div
-          className="fixed inset-0 h-full w-full bg-gray-400/50 backdrop-blur-[32px]"
+          className={backdropClass}
           onClick={onClose}
         ></div>
       )}

@@ -81,7 +81,8 @@ const AppHeader: React.FC = () => {
             {/* Cross Icon */}
           </button>
 
-          <Link href="/" aria-label="Proofly Home" className="absolute left-1/2 -translate-x-1/2 text-2xl font-semibold text-gray-900 dark:text-white">
+          <Link href="/" aria-label="Proofly Home" className="absolute left-1/2 -translate-x-1/2 text-2xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+            <Image src="/images/logo/lago.png" alt="Proofly logo" width={28} height={28} className="inline-block" />
             <span>Proofly</span>
           </Link>
 
@@ -125,19 +126,13 @@ const AppHeader: React.FC = () => {
         <div
           className={`${
             isApplicationMenuOpen ? "flex" : "hidden"
-          } items-center justify-between w-full gap-4 px-5 py-4 lg:flex shadow-theme-md lg:justify-end lg:px-0 lg:shadow-none`}
+          } items-center justify-between w-full gap-4 px-5 py-4 lg:flex lg:justify-end lg:px-0 lg:shadow-none`}
         >
           <div className="flex items-center gap-2 2xsm:gap-3">
-            {/* <!-- Dark Mode Toggler --> */}
             <ThemeToggleButton />
-            {/* <!-- Dark Mode Toggler --> */}
-
-           <NotificationDropdown /> 
-            {/* <!-- Notification Menu Area --> */}
+            <NotificationDropdown />
           </div>
-          {/* <!-- User Area --> */}
-          <UserDropdown /> 
-    
+          {isMobileOpen ? null : <UserDropdown /> }
         </div>
       </div>
     </header>

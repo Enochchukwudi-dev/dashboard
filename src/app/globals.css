@@ -189,7 +189,7 @@
     cursor: pointer;
   }
   body {
-    @apply relative font-normal font-outfit z-1 bg-gray-50;
+    @apply relative font-normal font-outfit z-1 bg-gray-50 no-scrollbar;
   }
 }
 
@@ -264,126 +264,114 @@
 
 @utility custom-scrollbar {
   &::-webkit-scrollbar {
-    @apply size-1.5;
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
   }
 
   &::-webkit-scrollbar-track {
-    @apply rounded-full;
     background: transparent;
+    border-radius: 9999px;
   }
 
-  /* Always-visible neutral thumb: black in light, white in dark */
+  /* Minimal thumb styling - no forced color so modal rules can override */
   &::-webkit-scrollbar-thumb {
-    background-color: #000000 !important;
-    border-radius: 9999px !important;
-    opacity: 1 !important;
+    border-radius: 9999px;
+    opacity: 1;
+    -webkit-appearance: none;
   }
 }
 
-.dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #ffffff !important;
-  opacity: 1 !important;
-}
-
-/* Firefox support for custom-scrollbar */
+/* Firefox: thin but do not force a specific thumb color */
 .custom-scrollbar {
-  scrollbar-color: #000000 transparent !important;
-  scrollbar-width: auto !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: auto !important;
 }
 .dark .custom-scrollbar {
-  scrollbar-color: #ffffff transparent !important;
-  scrollbar-width: auto !important;
-}
+  scrollbar-color: auto !important;
+  scrollbar-width: thin !important;
+} 
 
-/* Yellow scrollbar utility retained but using the same neutral visible styling (black/white) */
+/* Yellow scrollbar utility: thin yellow thumb suitable for lists or modals */
 @utility yellow-scrollbar {
   &::-webkit-scrollbar {
-    @apply size-1.5;
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
   }
 
   &::-webkit-scrollbar-track {
-    @apply rounded-full;
     background: transparent;
+    border-radius: 9999px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #000000 !important;
+    background-color: #F59E0B !important;
     border-radius: 9999px !important;
     opacity: 1 !important;
   }
 
   /* Firefox */
-  scrollbar-color: #000000 transparent !important;
-}
+  scrollbar-color: #F59E0B transparent !important;
+} 
 
-.dark .yellow-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #ffffff !important;
-}
-.dark .yellow-scrollbar {
-  scrollbar-color: #ffffff transparent !important;
-}
-
-/* Strong, scoped override for the transactions modal: neutral always-visible thumb */
-.transactions-modal .yellow-scrollbar::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-.transactions-modal .yellow-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 9999px;
-}
-.transactions-modal .yellow-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #000000 !important;
-  border-radius: 9999px !important;
-  opacity: 1 !important;
-}
-.dark .transactions-modal .yellow-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #ffffff !important;
-  opacity: 1 !important;
-}
-.transactions-modal .yellow-scrollbar {
-  /* Firefox */
-  scrollbar-color: #000000 transparent !important;
-}
-.dark .transactions-modal .yellow-scrollbar {
-  scrollbar-color: #ffffff transparent !important;
-}
-
-/* Universal override: make any scrollbar inside transactions-modal visible and neutral (black on light, white on dark) */
+/* Transactions modal: make inner scrollbars super thin and yellow (remove conflicting rules) */
+.transactions-modal .yellow-scrollbar::-webkit-scrollbar,
+.transactions-modal .custom-scrollbar::-webkit-scrollbar,
+.transactions-modal .thin-scrollbar::-webkit-scrollbar,
 .transactions-modal *::-webkit-scrollbar {
-  -webkit-appearance: none;
-  width: 10px;
-  height: 10px;
+  width: 1px !important;
+  height: 1px !important;
+  display: block !important;
+  -webkit-appearance: none !important;
 }
+
+.transactions-modal .yellow-scrollbar::-webkit-scrollbar-track,
+.transactions-modal .custom-scrollbar::-webkit-scrollbar-track,
+.transactions-modal .thin-scrollbar::-webkit-scrollbar-track,
 .transactions-modal *::-webkit-scrollbar-track {
   background: transparent;
   border-radius: 9999px;
 }
+
+.transactions-modal .yellow-scrollbar::-webkit-scrollbar-thumb,
+.transactions-modal .custom-scrollbar::-webkit-scrollbar-thumb,
+.transactions-modal .thin-scrollbar::-webkit-scrollbar-thumb,
 .transactions-modal *::-webkit-scrollbar-thumb {
-  background-color: #000000 !important; /* black in light mode */
+  background-color: #F59E0B !important; /* yellow */
   border-radius: 9999px !important;
-  opacity: 1 !important; /* always visible */
-}
-.dark .transactions-modal *::-webkit-scrollbar-thumb {
-  background-color: #ffffff !important; /* white in dark mode */
   opacity: 1 !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06);
+  transition: background-color 120ms ease;
 }
-.transactions-modal *::-webkit-scrollbar-corner {
-  background: transparent;
+
+.transactions-modal .yellow-scrollbar::-webkit-scrollbar-thumb:hover,
+.transactions-modal .custom-scrollbar::-webkit-scrollbar-thumb:hover,
+.transactions-modal .thin-scrollbar::-webkit-scrollbar-thumb:hover,
+.transactions-modal *::-webkit-scrollbar-thumb:hover {
+  background-color: #d97706 !important; /* slightly darker on hover */
 }
 
 /* Firefox */
+.transactions-modal .yellow-scrollbar,
+.transactions-modal .custom-scrollbar,
+.transactions-modal .thin-scrollbar,
 .transactions-modal * {
-  scrollbar-color: #000000 transparent !important; /* black thumb */
-  scrollbar-width: auto !important; /* ensure visible */
+  scrollbar-width: thin !important;
+  scrollbar-color: #F59E0B transparent !important;
 }
+
+.dark .transactions-modal .yellow-scrollbar::-webkit-scrollbar-thumb,
+.dark .transactions-modal .custom-scrollbar::-webkit-scrollbar-thumb,
+.dark .transactions-modal .thin-scrollbar::-webkit-scrollbar-thumb,
+.dark .transactions-modal *::-webkit-scrollbar-thumb {
+  background-color: #F59E0B !important;
+}
+
+.dark .transactions-modal .yellow-scrollbar,
+.dark .transactions-modal .custom-scrollbar,
+.dark .transactions-modal .thin-scrollbar,
 .dark .transactions-modal * {
-  scrollbar-color: #ffffff transparent !important; /* white thumb in dark */
-  scrollbar-width: auto !important;
+  scrollbar-color: #F59E0B transparent !important;
+  scrollbar-width: thin !important;
 }
 
 @utility thin-scrollbar {
@@ -391,39 +379,35 @@
   scrollbar-gutter: stable;
 
   &::-webkit-scrollbar {
-    width: 6px;
+    width: 2px;
     height: 6px;
   }
 
-  /* Give track a subtle contrast so thumb is visible */
   &::-webkit-scrollbar-track {
-    background: rgba(0,0,0,0.03);
-  }
-
-  /* Light mode: darker thumb for contrast; always visible (no hover-only transparency) */
-  &::-webkit-scrollbar-thumb {
-    background-color: #000000 !important;
+    background: transparent;
     border-radius: 9999px;
-    opacity: 1 !important;
+  }
+
+  /* Minimal thumb styling - do not force specific color */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    opacity: 1;
     -webkit-appearance: none;
-    transition: none;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+    transition: background-color 120ms ease;
   }
 
-  /* Hover state to make it slightly bolder */
   &::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0,0,0,0.9) !important;
+    filter: brightness(0.9);
   }
 
-  /* Show the corner when both scrollbars are present */
   &::-webkit-scrollbar-corner {
     background: transparent;
   }
 
-  /* Firefox - set both thumb and track colors explicitly */
+  /* Firefox - thin but no forced color */
   scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,0.9) rgba(0,0,0,0.04);
-}
+  scrollbar-color: auto;
+} 
 
 /* Dark mode: use white thumb for contrast and set Firefox color */
 .dark .thin-scrollbar::-webkit-scrollbar-thumb {
@@ -805,41 +789,28 @@ span.flatpickr-weekday,
   Cover multiple dark-mode attribute/class patterns to ensure the
   thumb is white when dark mode is active regardless of how it's applied.
 */
-/* WebKit browsers (Chrome, Edge, Safari, Opera) */
-*:where(:not(.no-scrollbar))::-webkit-scrollbar,
-:where(html,body):where(:not(.no-scrollbar))::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+/* Root page: hide the browser scrollbar while keeping scroll functionality. Add `.show-root-scrollbar` class to enable if needed. */
+:where(html,body):where(:not(.show-root-scrollbar)) {
+  -ms-overflow-style: none !important; /* IE and Edge */
+  scrollbar-width: none !important; /* Firefox */
 }
 
-*:where(:not(.no-scrollbar))::-webkit-scrollbar-track,
-:where(html,body):where(:not(.no-scrollbar))::-webkit-scrollbar-track {
+:where(html,body):where(:not(.show-root-scrollbar))::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
+
+:where(html,body):where(:not(.show-root-scrollbar))::-webkit-scrollbar-track {
   background: transparent;
 }
 
-/* Default (light): black thumb */
-*:where(:not(.no-scrollbar))::-webkit-scrollbar-thumb,
-:where(html,body):where(:not(.no-scrollbar))::-webkit-scrollbar-thumb {
-  background-color: #000000 !important;
-  border-radius: 9999px !important;
-  opacity: 1 !important;
+:where(html,body):where(:not(.show-root-scrollbar))::-webkit-scrollbar-thumb {
+  background: transparent !important;
+  opacity: 0 !important;
 }
 
-/* Dark mode variants: .dark on ancestor OR data-theme="dark" OR body/html having the class */
-:is(.dark, html.dark, body.dark, [data-theme="dark"])::-webkit-scrollbar-thumb,
-:is(.dark, html.dark, body.dark, [data-theme="dark"]) *::-webkit-scrollbar-thumb {
-  background-color: #ffffff !important;
-  opacity: 1 !important;
-}
-
-/* Firefox */
-*:where(:not(.no-scrollbar)) {
-  scrollbar-color: #000000 transparent !important;
-}
-:is(.dark, html.dark, body.dark, [data-theme="dark"]) *,
-:is(.dark, html.dark, body.dark, [data-theme="dark"]) {
-  scrollbar-color: #ffffff transparent !important;
-}
+/* If you need the root scrollbar visible for a specific scenario, add the `show-root-scrollbar` class to <html> or <body>. */
 
 
 .input-date-icon::-webkit-inner-spin-button,
@@ -1085,6 +1056,10 @@ span.flatpickr-weekday,
 /*
   ---break---
 */
+
+/* Note: global scrollbar hiding and modal exceptions were consolidated earlier.
+   Removed duplicate conflicting rules here to ensure the single `.transactions-modal` rule
+   near the utilities section controls modal scrollbar sizing and color. */
 
 @layer base {
   * {

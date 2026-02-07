@@ -43,7 +43,7 @@ export default function TimeframeDropdown({ value = "Today", onChange }: Props) 
         onClick={() => setOpen((s) => !s)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-medium bg-white border border-gray-200 text-gray-700 dark:bg-gray-900 dark:border-gray-800 dark:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1`}
+        className={`inline-flex items-center gap-2 px-4.5 py-1.5 rounded-full font-medium bg-white border border-gray-200 text-gray-700 dark:bg-gray-900 dark:border-gray-800 dark:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1`}
       >
         <span className="text-xs">{selected}</span>
         <ChevronDown className="ml-1 w-3 h-3" />
